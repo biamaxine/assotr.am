@@ -1,0 +1,27 @@
+@use 'sass:list';
+
+$types: (
+  'title-1': (1.5rem, 400), // 24px
+  'title-2': (1.25rem, 500), // 20px,
+  'default': (1rem, 500), // 16px,
+  'hint': (.75rem, 500), // 12px
+);
+
+@mixin init() {
+  @each $type-name, $type in $types {
+    .#{$type-name} {
+      font-size: list.nth($type, 1);
+      font-weight: list.nth($type, 2);
+
+      @for $i from 2 through 9 {
+        &.w-#{$i * 100} {
+          font-weight: $i * 100;
+        }
+      }
+
+      &.italic {
+        font-style: italic;
+      }
+    }
+  }
+}
