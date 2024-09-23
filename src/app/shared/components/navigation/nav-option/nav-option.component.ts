@@ -10,4 +10,6 @@ import { RouterModule } from '@angular/router';
 })
 export class NavOptionComponent {
   @Input() route!: string;
+  @Input() ico: string = '';
+  @Input() disabled: boolean | '' = false;
 }

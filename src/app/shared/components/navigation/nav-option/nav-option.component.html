@@ -1,6 +1,6 @@
-<a [routerLink]="route" class="nav-option-container">
-  <h1 class="nav-option-text">
-    <ng-content />
-  </h1>
-  <span class="nav-option-underline"></span>
+<a [routerLink]="route" class="nav-option-container default w-500 no-select {{
+  disabled || disabled === '' ? 'disabled' : ''
+}}">
+  @if (ico !== '') { <i class="mat-ico"> {{ ico }} </i> }
+  <ng-content />
 </a>

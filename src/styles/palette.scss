@@ -1,17 +1,19 @@
 $palettes: (
-  'blue': (
-    100: hsl(180, 90%, 90%),
-    300: hsl(180, 90%, 70%),
-    500: hsl(180, 90%, 50%),
-    700: hsl(180, 90%, 30%),
-    900: hsl(180, 90%, 10%),
-  ),
+  'light': #fff,
+  'dark': hsl(300, 90%, 10%),
   'pink': (
     100: hsl(300, 90%, 90%),
     300: hsl(300, 90%, 70%),
     500: hsl(300, 90%, 50%),
     700: hsl(300, 90%, 30%),
     900: hsl(300, 90%, 10%),
+  ),
+  'blue': (
+    100: hsl(180, 90%, 90%),
+    300: hsl(180, 90%, 70%),
+    500: hsl(180, 90%, 50%),
+    700: hsl(180, 90%, 30%),
+    900: hsl(180, 90%, 10%),
   ),
 );
 
@@ -44,9 +46,13 @@ $styles: (
 @each $style-name, $style in $styles {
   .#{$style-name} {
     @each $palette-name, $palette in $palettes {
-      @each $num, $color in $palette {
-        &-#{$palette-name}-#{$num} {
-          #{style}: $color;
+      @if $palette-name == 'light' or $palette-name == 'dark' {
+        &-#{$palette-name} { #{$style}: $palette; }
+      } @else {
+        @each $num, $color in $palette {
+          &-#{$palette-name}-#{$num} {
+            #{style}: $color;
+          }
         }
       }
     }
