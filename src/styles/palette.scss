@@ -52,3 +52,11 @@ $styles: (
     }
   }
 }
+
+@mixin gradient($num) {
+  background: linear-gradient(
+    90deg,
+    get('blue', $num),
+    get('pink', $num),
+  );
+}
