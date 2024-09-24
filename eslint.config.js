@@ -57,7 +57,6 @@ module.exports = tseslint.config(
         ignoreStrings: true,
         ignoreTemplateLiterals: true,
       }],
-      // 'prettier/prettier': ['error'],
     },
   },
   {

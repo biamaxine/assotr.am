@@ -35,23 +35,25 @@ $palettes: (
   @error '$palette: #{$key} not found!';
 }
 
-$styles: (
-  'bg': background-color,
-  'color': color,
-  'border': border-color,
-  'fill': fill,
-  'stroke': stroke,
-);
+@mixin init() {
+  $styles: (
+    'bg': background-color,
+    'color': color,
+    'border': border-color,
+    'fill': fill,
+    'stroke': stroke,
+  );
 
-@each $style-name, $style in $styles {
-  .#{$style-name} {
-    @each $palette-name, $palette in $palettes {
-      @if $palette-name == 'light' or $palette-name == 'dark' {
-        &-#{$palette-name} { #{$style}: $palette; }
-      } @else {
-        @each $num, $color in $palette {
-          &-#{$palette-name}-#{$num} {
-            #{style}: $color;
+  @each $style-name, $style in $styles {
+    .#{$style-name} {
+      @each $palette-name, $palette in $palettes {
+        @if $palette-name == 'light' or $palette-name == 'dark' {
+          &-#{$palette-name} { #{$style}: $palette; }
+        } @else {
+          @each $num, $color in $palette {
+            &-#{$palette-name}-#{$num} {
+              #{style}: $color;
+            }
           }
         }
       }

@@ -1,0 +1,139 @@
+@use '../../../../styles/palette.scss' as palette;
+@use '../../../../styles/types.scss' as type;
+
+:host {
+  @include palette.gradient(500);
+
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+  box-sizing: border-box;
+  padding: 1rem;
+
+  app-logo {
+    width: 20%;
+    min-width: 200px;
+  }
+
+  h1 { text-align: center; }
+
+  &.not-home {
+    height: 50vw;
+    min-height: 240px;
+    max-height: 296px;
+
+    gap: .5rem;
+
+    padding: 0;
+
+    background: none;
+
+    header.container {
+      height: 100%;
+      width: 100%;
+
+      display: flex;
+
+      background-size: cover;
+      background-position: center;
+
+      transition: background-image 1s ease-in-out;
+
+      @media screen and (min-width: 720px) {
+        overflow: hidden;
+
+        border-radius: .5rem;
+      }
+
+      div.blur {
+        width: 100%;
+        height: 100%;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        gap: .5rem;
+
+        box-sizing: border-box;
+        padding: 1rem;
+
+        background: linear-gradient(
+          rgb(palette.get('dark'), 0),
+          palette.get('dark'),
+        );
+
+        h1, p {
+          text-align: center;
+          color: palette.get('light');
+
+        }
+
+        @media screen and (min-width: 720px) {
+          padding: 1.5rem;
+
+          h1.event-title {
+            @include type.get('title-2');
+          }
+        }
+      }
+    }
+
+    div.pic-counter {
+      display: flex;
+      gap: .5rem;
+
+      span.cont {
+        width: .5rem;
+        height: .5rem;
+
+        display: flex;
+
+        border-radius: 50%;
+
+        background-color: palette.get('dark');
+
+        transition: background-color 1s ease-in-out;
+
+        &.current {
+          background-color: palette.get('pink', 500);
+        }
+      }
+    }
+  }
+
+  &.error-404 {
+    padding: 0 1rem;
+
+    header.container {
+      height: 100vh;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+
+      box-sizing: border-box;
+
+      h1, p {
+        text-align: center;
+
+        display: flex;
+        align-items: center;
+      }
+
+      @media screen and (min-width: 720px) {
+        height: calc(100vh - 6rem);
+      }
+    }
+
+    div.pic-counter {
+      display: none;
+    }
+  }
+}

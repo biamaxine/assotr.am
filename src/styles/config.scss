@@ -1,3 +1,5 @@
+@use './palette.scss' as palette;
+
 @mixin export($style-name, $style) {
   #{$style-name}: $style;
   * { #{$style-name}: $style; }
@@ -15,4 +17,35 @@ span.spacer {
        -moz-user-select: none; /* Old versions of Firefox */
         -ms-user-select: none; /* Internet Explorer/Edge */
             user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+
+button.app-btn {
+  display: flex;
+  align-items: center;
+
+  padding: .5rem 1rem;
+  border: none;
+  border-radius: .5rem;
+
+  cursor: pointer;
+
+  &-outline, &-outline {
+    @extend .app-btn;
+
+    border: 2px solid;
+    border-color: palette.get('dark');
+    background-color: transparent;
+    color: palette.get('dark');
+
+    transition: all .3s ease-in-out;
+
+    .mat-ico { transition: color .3s ease-in-out; }
+
+    &:hover {
+      background-color: palette.get('dark');
+      color: palette.get('light');
+
+      .mat-ico { color: palette.get('light'); }
+    }
+  }
 }

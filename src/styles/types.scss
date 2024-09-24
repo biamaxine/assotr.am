@@ -1,11 +1,35 @@
 @use 'sass:list';
 
 $types: (
+  'display': (3rem, 900), // 48px
   'title-1': (1.5rem, 400), // 24px
-  'title-2': (1.25rem, 500), // 20px,
-  'default': (1rem, 500), // 16px,
+  'title-2': (1.25rem, 500), // 20px
+  'default': (1rem, 500), // 16px
   'hint': (.75rem, 500), // 12px
 );
+
+@mixin get($key, $weight: null, $isItalic: null, $map: $types) {
+  @if map-has-key($map, $key) {
+    $type: map-get($map, $key);
+
+    font-size: list.nth($type, 1);
+    @if $weight == null {
+      font-weight: list.nth($type, 2);
+    } @else {
+      @for $i from 2 through 9 {
+        @if $weight == $i * 100 {
+          font-weight: $weight;
+        }
+      }
+    }
+
+    @if typeof($isItalic) == 'boolean' and $isItalic {
+      font-style: true;
+    }
+  } @else {
+    @error '$key: #{$key} not exists in $types!';
+  }
+}
 
 @mixin init() {
   @each $type-name, $type in $types {

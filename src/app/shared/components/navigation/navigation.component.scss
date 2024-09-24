@@ -4,24 +4,29 @@
 :host {
   @include config.export('display', flex);
 
-  position: relative;
+  position: fixed;
   overflow: hidden;
+  z-index: 8;
 
-  width: 100%;
+  width: 0%;
   height: 100vh;
 
+  transition: all .3s ease-in-out;
+
   &.open {
+    width: 100%;
+
     background-color: rgb(palette.get('dark'), .75);
   }
 
   @media screen and (min-width: 720px) {
     @include palette.gradient(500);
 
-    position: fixed;
     right: 0;
     z-index: 9;
 
     height: 3rem;
+    width: 100%;
 
     perspective: 1000px;
 
@@ -109,23 +114,27 @@
   }
 
   button.menu {
-    @include palette.gradient(500);
-
     position: fixed;
     right: 1rem;
     top: 1rem;
+    z-index: 9;
 
     box-sizing: border-box;
     padding: .5rem;
     border: none;
     border-radius: .5rem;
 
+    background-color: rgb(palette.get('dark'), .5);
+    color: palette.get('light');
+
     cursor: pointer;
 
-    transition: right .3s ease-in-out;
+    transition: all .3s ease-in-out;
 
     &.open {
       right: calc(50% + 1rem);
+
+      background-color: transparent;
     }
   }
 }

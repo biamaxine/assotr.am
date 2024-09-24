@@ -1,0 +1,32 @@
+@if (isHome) {
+  <app-logo color="dark" />
+  <h1 class="title-2">
+    Associação de Travestis, Transexuais<br />e Transgêneros do Amazonas
+  </h1>
+} @else {
+  <header #header class="container">
+    @if (event) {
+      <div class="blur">
+        <h1 class="event-title default">{{ event.title.full }}</h1>
+        <p class="event-date hint">{{ event.date }}</p>
+      </div>
+    } @else {
+      <h1 class="display">404 <i class="mat-ico display">search</i></h1>
+      <p class="title-1 w-700">Esta página não foi encontrada.</p>
+      <button routerLink="/" class="app-btn-outline title-2 w-700">
+        <i class="mat-ico"> arrow_back_ios </i>
+        VOLTAR
+      </button>
+    }
+  </header>
+
+  <div class="pic-counter">
+    @for (cont of event?.pictures; track cont) {
+      <span
+        class="cont {{
+          event?.pictures?.indexOf(cont) === index ? 'current' : ''
+        }}"
+      ></span>
+    }
+  </div>
+}

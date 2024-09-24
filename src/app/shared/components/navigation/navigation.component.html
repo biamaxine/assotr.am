@@ -1,10 +1,22 @@
-<button #menu (click)="isOpen = !isOpen" class="menu mat-ico {{ isOpen ? 'open' : '' }}">
-  {{ isOpen ? 'close' : 'menu' }}
+<button
+  (click)="onClick()"
+  (mouseenter)="onMouseEnter()"
+  (mouseleave)="onMouseLeave()"
+  class="menu mat-ico {{ menu.status ? 'open' : '' }}"
+>
+  {{ menu.status ? "close" : "menu" }}
 </button>
 
-<nav #nav class="container {{ isHome ? 'isHome' : 'isNotHome' }} {{ isOpen ? 'open' : '' }}">
-
-  <div class="nav-content">
+<nav
+  class="container {{ isHome ? 'isHome' : 'isNotHome' }} {{
+    menu.status ? 'open' : ''
+  }}"
+>
+  <div
+    (mouseenter)="onMouseEnter()"
+    (mouseleave)="onMouseLeave()"
+    class="nav-content"
+  >
     <app-nav-option> ASSOTR.AM </app-nav-option>
 
     <span class="spacer"></span>
@@ -16,9 +28,7 @@
   </div>
 
   <div class="nav-content not-home">
-    <app-nav-option route="/" ico="arrow_back_ios">
-      ASSOTR.AM
-    </app-nav-option>
+    <app-nav-option route="/" ico="arrow_back_ios"> ASSOTR.AM </app-nav-option>
 
     <span class="spacer"></span>
 
@@ -26,5 +36,4 @@
 
     <app-nav-option> CONTATO </app-nav-option>
   </div>
-
 </nav>
