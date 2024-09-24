@@ -1,0 +1,28 @@
+@if (innerWidth < 720) {
+  <main>
+    <app-btn-dropdown title="missão" [context]="about?.mission || ''" />
+    <app-btn-dropdown title="visão" [context]="about?.vision || ''" />
+    <app-btn-dropdown title="valores" [context]="about?.values || ''" />
+  </main>
+
+  <app-btn-dropdown title="história" [context]="about?.history || ['']" />
+} @else {
+  <main>
+    @for (item of aboutItems; track item) {
+      <div class="about-item">
+        <h1 class="about-itm-title title-1">{{ item.title.toUpperCase() }}</h1>
+        <span class="about-item-underline"></span>
+        <p class="about-item-context default">{{ item.context }}</p>
+      </div>
+    }
+  </main>
+
+  <section class="about-history">
+    <h1 class="about-history-title title-1">HISTÓRIA</h1>
+    <div class="about-history-container">
+      @for (context of about?.history; track context) {
+        <p class="about-context default">{{ context }}</p>
+      }
+    </div>
+  </section>
+}

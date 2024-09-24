@@ -52,7 +52,7 @@ $palettes: (
         } @else {
           @each $num, $color in $palette {
             &-#{$palette-name}-#{$num} {
-              #{style}: $color;
+              #{$style}: $color;
             }
           }
         }

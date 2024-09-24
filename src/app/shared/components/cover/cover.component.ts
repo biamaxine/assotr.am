@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import { BtnDirective } from '../../directives/btn.directive';
 import { Event } from '../../interfaces/event.interface';
 import { RouteService } from '../../services/route.service';
 import { LogoComponent } from '../logo/logo.component';
@@ -17,7 +18,7 @@ import { LogoComponent } from '../logo/logo.component';
 @Component({
   selector: 'app-cover',
   standalone: true,
-  imports: [RouterModule, LogoComponent],
+  imports: [RouterModule, LogoComponent, BtnDirective],
   templateUrl: './cover.component.html',
   styleUrl: './cover.component.scss',
 })

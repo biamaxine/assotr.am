@@ -1,0 +1,49 @@
+<button (click)="onClick()" class="dropdown-btn">
+  <h1 class="dropdown-title title-1">{{ title.toUpperCase() }}</h1>
+  <i class="mat-ico"> expand_more </i>
+</button>
+
+<span class="dropdown-underline"></span>
+
+@if (isString) {
+  <p class="dropdown-context default">{{ context }}</p>
+} @else {
+  <section class="context-container">
+    <div
+      class="context-content"
+      [style]="'transform: translateX(calc(-100%/3 *' + index + '))'"
+    >
+      @for (text of context; track text) {
+        <p
+          class="dropdown-context default {{
+            index === context.indexOf(text) ? 'current' : ''
+          }}"
+        >
+          {{ text }}
+        </p>
+      }
+    </div>
+
+    <div class="controller">
+      <button
+        btn
+        outline
+        [disabled]="index === 0"
+        (click)="controllerBack()"
+        class="back {{ index === 0 ? 'disabled' : '' }}"
+      >
+        <i class="mat-ico"> arrow_forward_ios </i>
+      </button>
+      <span class="spacer"></span>
+      <button
+        btn
+        outline
+        [disabled]="index === context.length - 1"
+        (click)="controllerNext()"
+        class="next {{ index === context.length - 1 ? 'disabled' : '' }}"
+      >
+        <i class="mat-ico"> arrow_forward_ios </i>
+      </button>
+    </div>
+  </section>
+}

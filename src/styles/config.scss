@@ -19,33 +19,30 @@ span.spacer {
             user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }
 
-button.app-btn {
+button.btn-directive {
   display: flex;
   align-items: center;
 
+  box-sizing: border-box;
   padding: .5rem 1rem;
-  border: none;
+  border: 2px solid;
   border-radius: .5rem;
+
+  transition: all .3s ease-in-out;
 
   cursor: pointer;
 
-  &-outline, &-outline {
-    @extend .app-btn;
+  i.mat-ico {
+    transition: color .3s ease-in-out;
+  }
 
-    border: 2px solid;
-    border-color: palette.get('dark');
+  &-outline {
+    @extend .btn-directive;
+
     background-color: transparent;
-    color: palette.get('dark');
+  }
 
-    transition: all .3s ease-in-out;
-
-    .mat-ico { transition: color .3s ease-in-out; }
-
-    &:hover {
-      background-color: palette.get('dark');
-      color: palette.get('light');
-
-      .mat-ico { color: palette.get('light'); }
-    }
+  &.disabled {
+    opacity: .25;
   }
 }

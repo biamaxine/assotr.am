@@ -1,0 +1,121 @@
+@use '../../../../styles/palette.scss' as palette;
+
+:host {
+  overflow: hidden;
+
+  width: 100%;
+  max-height: 3rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  box-sizing: border-box;
+  border: 2px solid;
+  border-radius: .5rem;
+
+  border-color: palette.get('pink', 500);
+
+  transition: all .6s ease-in-out;
+
+  button.dropdown-btn {
+    width: 100%;
+    display: flex;
+
+    box-sizing: border-box;
+    padding: .5rem;
+    border: none;
+
+    background-color: transparent;
+
+    cursor: pointer;
+
+    h1.dropdown-title {
+      display: flex;
+      justify-content: center;
+      flex: 1 1 auto;
+    }
+
+    i.mat-ico {
+      font-size: 2rem;
+
+      transition: transform .3s ease-in-out .3s;
+    }
+  }
+
+  span.dropdown-underline {
+    @include palette.gradient(500);
+
+    width: 0;
+    height: 2px;
+
+    display: flex;
+
+    border-radius: 2px;
+
+    transition: width .3s ease-in-out .3s;
+  }
+
+  p.dropdown-context {
+    width: 100%;
+
+    box-sizing: border-box;
+    padding: .5rem 1rem;
+
+    text-align: center;
+
+    transition: max-height .9s ease-in-out;
+  }
+
+  section.context-container {
+    position: relative;
+    overflow: hidden;
+
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    div.context-content {
+      width: 300%;
+      display: flex;
+
+      align-items: center;
+
+      transition: transform .3s ease-in-out;
+
+      p.dropdown-context {
+        padding-bottom: 0;
+      }
+    }
+
+    div.controller {
+      width: 100%;
+
+      display: flex;
+
+      box-sizing: border-box;
+      padding: 1rem;
+
+      button.back {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  &.open {
+    max-height: 1024px;
+
+    span.dropdown-underline {
+      width: 80%;
+    }
+
+    button.dropdown-btn {
+      i.mat-ico {
+        transform: rotate(180deg);
+
+        transition: transform .3s ease-in-out;
+      }
+    }
+  }
+}
