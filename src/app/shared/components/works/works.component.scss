@@ -1,0 +1,45 @@
+@use '../../../../styles/palette.scss' as palette;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+  main {
+    overflow-x: scroll;
+
+    width: 100%;
+
+    box-sizing: border-box;
+    padding: 0 1rem;
+
+    @media screen and (min-width: 720px) {
+      padding: 0;
+    }
+
+    &::-webkit-scrollbar {
+      height: 2px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      @include palette.gradient(500);
+      border-radius: 2px;
+      opacity: .5;
+
+      cursor: pointer;
+    }
+
+    &::-webkit-scrollbar-thumb:active {
+      @include palette.gradient(500);
+      opacity: 1;
+
+      cursor: grabbing;
+    }
+
+    div.works-container {
+      display: flex;
+      gap: 1rem;
+    }
+  }
+}

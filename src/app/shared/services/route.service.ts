@@ -19,7 +19,7 @@ export class RouteService {
   }
 
   getId() {
-    const [_, id] = this.currentUrl.split('_ID-');
+    const [_, id] = this.currentUrl.split('_id_');
     return id;
   }
 }
