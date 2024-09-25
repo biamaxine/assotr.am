@@ -1,13 +1,9 @@
 <h1 class="works-title title-1"><ng-content /></h1>
 
-<main #div (wheel)="onWheel(div, $event)">
-  <div
-    #worksContainer
-    class="works-container"
-    [style]="style?.['worksContainer']"
-  >
+<main #main (wheel)="onWheel(main, $event)">
+  <div #worksContainer class="works-container" [style]="style.container">
     @for (work of events; track work) {
-      <app-work-item [work]="work" [style]="style?.['s2']" />
+      <app-work-item [work]="work" [style]="style.content" />
     }
   </div>
 </main>

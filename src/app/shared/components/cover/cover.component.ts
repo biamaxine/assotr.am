@@ -72,9 +72,7 @@ export class CoverComponent implements OnChanges, OnInit {
         }, 5000);
       }
     } else {
-      const id = this.route.getId();
-      if (!id || id === '' || Number.isNaN(+id))
-        this.renderer.addClass(this.element.nativeElement, 'error-404');
+      this.renderer.addClass(this.element.nativeElement, 'error-404');
     }
   }
 }

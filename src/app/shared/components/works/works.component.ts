@@ -11,6 +11,7 @@ import {
 
 import { environment } from '../../../../environments/environment';
 import { Event } from '../../interfaces/event.interface';
+import { WheelService } from '../../services/wheel.service';
 import { WorkItemComponent } from './work-item/work-item.component';
 
 @Component({
@@ -24,24 +25,24 @@ export class WorksComponent implements OnInit {
   @Output() scrollCaptured = new EventEmitter<WheelEvent>();
 
   url = environment.base_url + 'events/events_1.json';
-  events!: Event[];
+  events: Event[] = [];
 
-  style: any = {};
+  style: { container?: string; content?: string } = {};
   width = window.innerWidth;
 
-  move = 0;
-  timeout: any;
-
+  @ViewChild('main', { static: true }) main!: ElementRef<HTMLElement>;
   @HostListener('window:resize') onResize() {
-    this.update(window.innerWidth);
+    this.style = this.wheel.update(this.events);
   }
-  constructor(private readonly http: HttpClient) {}
+  constructor(
+    private readonly http: HttpClient,
+    private readonly wheel: WheelService,
+  ) {}
 
   ngOnInit(): void {
     this.http.get<{ events: Event[] }>(this.url).subscribe(({ events }) => {
       // this.events = events;
-
-      this.events = [];
+      // this.wheel.updateLength(events);
 
       const event = events[0];
       for (let i = 0; i < 10; i++) {
@@ -55,40 +56,13 @@ export class WorksComponent implements OnInit {
         });
       }
 
-      this.update(window.innerWidth);
-      const length = this.events.length;
-      this.style['s2'] = `width: calc(100%/${length});`;
+      this.style = this.wheel.update(this.events, this.main.nativeElement);
+      // this.style = this.wheel.update(events);
     });
   }
 
-  update(width: number) {
-    this.width = width;
-
-    const rem = 16;
-    const margin = width < 720 ? 2 * rem : 6 * rem;
-    const workWidth = width - margin - rem <= 360 ? width - margin - rem : 360;
-
-    // const workQuantity = Math.floor((width - margin) / (workWidth + rem));
-
-    const length = this.events.length;
-    this.style['worksContainer'] =
-      `width: calc(${workWidth}px * ${length} - 1rem);`;
-  }
-
-  onWheel(div: HTMLElement, e: WheelEvent) {
-    this.move += e.deltaY;
-
-    clearTimeout(this.timeout);
-    this.timeout = setTimeout(() => {
-      div.scrollTo({
-        behavior: 'smooth',
-        left: div.scrollLeft + this.move,
-      });
-      this.move = 0;
-    }, 50);
-
-    e.preventDefault();
-
+  onWheel(el: HTMLElement, e: WheelEvent) {
+    this.wheel.active(el, e);
     this.scrollCaptured.emit(e);
   }
 }
