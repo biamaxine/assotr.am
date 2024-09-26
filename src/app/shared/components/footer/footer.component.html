@@ -1,0 +1,53 @@
+<footer>
+  <div class="contacts-container">
+    <h2 class="contacts-title title-2">CONTATOS</h2>
+    <div class="contacts-content">
+      @for (contact of contacts; track contact) {
+        @if (contact.url) {
+          <a
+            #link
+            (mouseenter)="onMouseEnter(link)"
+            (mouseleave)="onMouseLeave(link)"
+            [href]="
+              contact.name !== 'gmail' ? contact.url : 'mailto:' + contact.url
+            "
+            class="contact default"
+          >
+            <app-ico [ico]="contact.name" class="fill-light" />
+            {{ getAccount(contact.url) }}
+          </a>
+        } @else if (contact.number) {
+          <div
+            #div
+            (mouseenter)="onMouseEnter(div)"
+            (mouseleave)="onMouseLeave(div)"
+            class="contact default"
+          >
+            <app-ico [ico]="contact.name" class="fill-light" />
+            {{ contact.number }}
+          </div>
+        }
+      }
+    </div>
+  </div>
+
+  <span class="line bg-light"></span>
+
+  <div class="address-container">
+    <h2 class="address-title title-2">ENDEREÇO</h2>
+    <div [innerHTML]="address" class="address-content"></div>
+  </div>
+
+  <span class="line"></span>
+
+  <div class="logo-container">
+    <app-logo />
+  </div>
+
+  <span class="line bg-light"></span>
+</footer>
+
+<p class="developed-by hint">
+  * Website developed by
+  <a href="https://biamaxine.github.io" class="hint">Bia Maxine</a>
+</p>

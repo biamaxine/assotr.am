@@ -1,1 +1,13 @@
 <app-cover [event]="event" />
+
+@if (event) {
+  <main class="event-context">
+    @for (text of event.context; track text) {
+      <p class="context default">{{ text }}</p>
+    }
+  </main>
+
+  <app-works (scrollCaptured)="onChildScrollCaptured($event)">
+    VEJA TAMBÉM
+  </app-works>
+}

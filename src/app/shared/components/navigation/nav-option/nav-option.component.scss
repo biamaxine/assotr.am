@@ -23,18 +23,22 @@
     padding: .5rem 1rem;
 
     text-decoration: none;
-    color: palette.get('dark');
+    color: palette.get('light');
 
     cursor: pointer;
     &.disabled { cursor: default; }
 
     transition: color .3s ease-in-out;
 
-    .mat-ico { transition: color .3s ease-in-out; }
+    .mat-ico {
+      color: palette.get('light');
+
+      transition: color .3s ease-in-out;
+    }
 
     &:hover, &:hover .mat-ico {
       &:not(.disabled) {
-        color: palette.get('light');
+        color: palette.get('dark');
       }
     }
 

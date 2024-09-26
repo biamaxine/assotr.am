@@ -5,7 +5,6 @@ import {
   OnChanges,
   OnInit,
   Renderer2,
-  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -41,8 +40,9 @@ export class CoverComponent implements OnChanges, OnInit {
     else this.isHome = false;
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     if (this.event) {
+      this.renderer.removeClass(this.element.nativeElement, 'error-404');
       this.renderer.addClass(this.element.nativeElement, 'not-home');
 
       if (this.header) {

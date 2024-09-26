@@ -4,13 +4,32 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 1rem;
+
+  padding: 0 0 1rem;
 
   @media screen and (min-width: 720px) {
     box-sizing: border-box;
     padding: calc(3rem + 1.5rem) 3rem 1.5rem;
   }
 
-  &.error-404 {
+  main.event-context {
+    width: 100%;
 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+
+    box-sizing: border-box;
+    padding: 0 1rem;
+
+    p.context {
+      text-align: center;
+    }
+  }
+
+  &.error-404 {
+    padding: 0;
   }
 }
