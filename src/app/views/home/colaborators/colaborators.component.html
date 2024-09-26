@@ -1,0 +1,15 @@
+<h1 class="colaborators-title title-1">COLABORADORES</h1>
+
+<main class="{{ width < 720 ? 'scroll' : '' }}">
+  <div
+    class="colaborators-container"
+    [style]="width < 720 ? style.container : ''"
+  >
+    @for (colaborator of colaborators; track colaborator.id) {
+      <app-colaborator
+        [data]="colaborator"
+        [style]="width < 720 ? style.content : ''"
+      />
+    }
+  </div>
+</main>

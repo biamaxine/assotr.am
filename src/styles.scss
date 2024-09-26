@@ -14,5 +14,32 @@
   color: palette.get('pink', 900);
 }
 
+body {
+  &::-webkit-scrollbar {
+    width: 6px;
+
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    box-sizing: border-box;
+    border: 2px solid palette.get('light');
+    border-radius: .5rem;
+    background-color: palette.get('dark');
+
+    border-top-width: 1rem;
+    border-bottom-width: 1rem;
+
+    cursor: pointer;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    opacity: 1;
+
+    cursor: grabbing;
+  }
+}
+
 @include palette.init();
 @include type.init();
+

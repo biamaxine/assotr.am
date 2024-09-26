@@ -1,0 +1,62 @@
+@use '../../../../styles/palette.scss' as palette;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+  main {
+    width: 100%;
+
+    box-sizing: border-box;
+    padding: 0 1rem;
+
+    &.scroll {
+      overflow-x: scroll;
+
+      &::-webkit-scrollbar {
+        height: .5rem;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        @include palette.gradient(500);
+
+        border: calc(.5rem/2 - 1px) solid palette.get('light');
+        border-radius: 2px;
+
+        border-left-width: 1rem;
+        border-right-width: 1rem;
+
+        cursor: pointer;
+      }
+
+      &::-webkit-scrollbar-thumb:active {
+        @include palette.gradient(500);
+        opacity: 1;
+
+        cursor: grabbing;
+      }
+    }
+
+    div.colaborators-container {
+      display: flex;
+      gap: 1rem;
+    }
+
+    @media screen and (min-width: 720px) {
+      padding: 0 1px;
+
+      div.colaborators-container {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0;
+        row-gap: 1.5rem;
+
+        app-colaborator {
+          width: calc(100%/3);
+        }
+      }
+    }
+  }
+}

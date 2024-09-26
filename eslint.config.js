@@ -46,6 +46,7 @@ module.exports = tseslint.config(
         },
       ],
       '@typescript-eslint/no-inferrable-types': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
       'quotes': ['error', 'single'],
       'semi': ['error', 'always'],
       'comma-dangle': ['error', 'always-multiline'],

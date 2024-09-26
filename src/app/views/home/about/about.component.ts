@@ -20,14 +20,14 @@ export class AboutComponent implements OnInit {
     history: string[];
   };
 
-  innerWidth: number = window.innerWidth;
+  width: number = window.innerWidth;
   aboutItems?: {
     title: string;
     context: string;
   }[];
 
   @HostListener('window:resize') onResize() {
-    this.innerWidth = window.innerWidth;
+    this.width = window.innerWidth;
   }
   constructor(private readonly http: HttpClient) {}
 
