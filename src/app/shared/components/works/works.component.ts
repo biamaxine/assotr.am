@@ -13,6 +13,7 @@ import { environment } from '../../../../environments/environment';
 import { Event } from '../../interfaces/event.interface';
 import { WheelService } from '../../services/wheel.service';
 import { WorkItemComponent } from './work-item/work-item.component';
+import { ScrollService } from '../../services/scroll.service';
 
 @Component({
   selector: 'app-works',
@@ -37,7 +38,11 @@ export class WorksComponent implements OnInit {
   constructor(
     private readonly http: HttpClient,
     private readonly wheel: WheelService,
-  ) {}
+    private readonly scroll: ScrollService,
+    private readonly element: ElementRef,
+  ) {
+    this.scroll.save('works', element.nativeElement);
+  }
 
   ngOnInit(): void {
     this.http.get<{ events: Event[] }>(this.url).subscribe(({ events }) => {

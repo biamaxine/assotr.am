@@ -19,7 +19,11 @@
     min-width: 200px;
   }
 
-  h1 { text-align: center; }
+  h1 {
+    text-align: center;
+
+    color: palette.get('light');
+  }
 
   @media screen and (min-width: 720px) {
     border-radius: .5rem;

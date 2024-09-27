@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 
 import { environment } from '../../../../environments/environment';
 import { Colaborator } from '../../../shared/interfaces/colaborator.interface';
-import { WheelService } from '../../../shared/services/wheel.service';
 import { ColaboratorComponent } from './colaborator/colaborator.component';
+import { ScrollService } from '../../../shared/services/scroll.service';
 
 @Component({
   selector: 'app-colaborators',
@@ -25,8 +25,11 @@ export class ColaboratorsComponent implements OnInit {
   }
   constructor(
     private readonly http: HttpClient,
-    private readonly wheel: WheelService,
-  ) {}
+    private readonly scroll: ScrollService,
+    private readonly element: ElementRef,
+  ) {
+    scroll.save('colaborators', element.nativeElement);
+  }
 
   ngOnInit(): void {
     this.http

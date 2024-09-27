@@ -1,8 +1,9 @@
-import { Component, HostListener, OnInit } from '@angular/core';
-
-import { BtnDropdownComponent } from '../../../shared/components/btn-dropdown/btn-dropdown.component';
-import { environment } from '../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+
+import { environment } from '../../../../environments/environment';
+import { BtnDropdownComponent } from '../../../shared/components/btn-dropdown/btn-dropdown.component';
+import { ScrollService } from '../../../shared/services/scroll.service';
 
 @Component({
   selector: 'app-about',
@@ -29,7 +30,13 @@ export class AboutComponent implements OnInit {
   @HostListener('window:resize') onResize() {
     this.width = window.innerWidth;
   }
-  constructor(private readonly http: HttpClient) {}
+  constructor(
+    private readonly http: HttpClient,
+    private readonly scroll: ScrollService,
+    private readonly element: ElementRef,
+  ) {
+    this.scroll.save('about', element.nativeElement);
+  }
 
   ngOnInit(): void {
     this.http

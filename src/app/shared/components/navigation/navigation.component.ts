@@ -1,8 +1,15 @@
-import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  OnInit,
+  Renderer2,
+} from '@angular/core';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { filter } from 'rxjs';
 
 import { RouteService } from '../../services/route.service';
+import { ScrollService } from '../../services/scroll.service';
 import { NavOptionComponent } from './nav-option/nav-option.component';
 
 @Component({
@@ -14,17 +21,17 @@ import { NavOptionComponent } from './nav-option/nav-option.component';
 })
 export class NavigationComponent implements OnInit {
   isHome: boolean = true;
+  width = window.innerWidth;
 
-  menu = {
-    status: false,
-    mouse: false,
-  };
-
+  @HostListener('window:resize') onResize() {
+    this.width = window.innerWidth;
+  }
   constructor(
     private readonly router: Router,
     private readonly route: RouteService,
     private readonly renderer: Renderer2,
     private readonly element: ElementRef,
+    private readonly scroll: ScrollService,
   ) {}
 
   ngOnInit(): void {
@@ -39,25 +46,51 @@ export class NavigationComponent implements OnInit {
 
     const element = this.element.nativeElement as HTMLElement;
     element.addEventListener('click', () => {
-      if (!this.menu.mouse && this.menu.status) {
-        this.onClick();
+      if (!this.__menu.mouseOver && this.__menu.public.isOpen) {
+        this.btn.click();
       }
     });
   }
 
-  onClick() {
-    this.menu.status = !this.menu.status;
-
-    if (this.menu.status)
+  private __menu = {
+    mouseOver: false,
+    open: () => {
+      this.__menu.public.isOpen = true;
       this.renderer.addClass(this.element.nativeElement, 'open');
-    else this.renderer.removeClass(this.element.nativeElement, 'open');
+    },
+    close: () => {
+      this.__menu.public.isOpen = false;
+      this.renderer.removeClass(this.element.nativeElement, 'open');
+    },
+    public: {
+      isOpen: false,
+      mouseenter: (): void => {
+        this.__menu.mouseOver = true;
+      },
+      mouseleave: (): void => {
+        this.__menu.mouseOver = false;
+      },
+    },
+  };
+
+  get menu() {
+    return this.__menu.public;
   }
 
-  onMouseEnter() {
-    this.menu.mouse = true;
-  }
+  btn = {
+    click: () => {
+      if (this.__menu.public.isOpen) this.__menu.close();
+      else this.__menu.open();
+    },
+  };
 
-  onMouseLeave() {
-    this.menu.mouse = false;
+  scrollTo(name: string, difference?: number) {
+    if (typeof difference === 'number') return this.scroll.to(name, difference);
+
+    if (this.width >= 720) {
+      return this.scroll.to(name, -16 * 4.5);
+    }
+
+    return this.scroll.to(name, -16);
   }
 }

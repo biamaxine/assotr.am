@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 
 import { environment } from '../../../../environments/environment';
 import { Contact } from '../../interfaces/contact.interface';
 import { IcoComponent } from '../ico/ico.component';
 import { LogoComponent } from '../logo/logo.component';
+import { ScrollService } from '../../services/scroll.service';
 
 @Component({
   selector: 'app-footer',
@@ -21,7 +22,11 @@ export class FooterComponent implements OnInit {
   constructor(
     private readonly http: HttpClient,
     private readonly renderer: Renderer2,
-  ) {}
+    private readonly scroll: ScrollService,
+    private readonly element: ElementRef,
+  ) {
+    scroll.save('footer', element.nativeElement);
+  }
 
   ngOnInit(): void {
     this.http
