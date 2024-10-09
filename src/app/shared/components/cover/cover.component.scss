@@ -133,6 +133,12 @@
 
         display: flex;
         align-items: center;
+
+        color: palette.get('light');
+
+        i.mat-ico {
+          color: palette.get('light');
+        }
       }
 
       @media screen and (min-width: 720px) {
